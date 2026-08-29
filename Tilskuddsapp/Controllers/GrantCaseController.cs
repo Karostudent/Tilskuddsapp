@@ -2,9 +2,9 @@
 
 namespace Tilskuddsapp.Controllers
 {
-    public class GrantCaseController : Controller
+    public class GrantCasesController : Controller
     {
-        public IActionResult Index()
+        public IActionResult GrantCaseIndex()
         {
             return View();
         }

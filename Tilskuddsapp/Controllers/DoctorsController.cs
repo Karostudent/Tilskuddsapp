@@ -4,7 +4,7 @@ namespace Tilskuddsapp.Controllers
 {
     public class DoctorsController : Controller
     {
-        public IActionResult Index()
+        public IActionResult DoctorIndex()
         {
             return View();
         }

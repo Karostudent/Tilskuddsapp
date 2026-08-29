@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using Tilskuddsapp.Models;
+using Tilskuddsapp.ViewModels;
 
 namespace Tilskuddsapp.Controllers
 {
