@@ -1,0 +1,76 @@
+﻿@model Tilskuddsapp.ViewModels.GrantCaseFormViewModel
+
+@{
+    ViewData["Title"] = "Beregnet fordeling";
+}
+
+<h1>Beregnet fordeling</h1>
+
+<div class="card mt-4">
+    <div class="card-body">
+
+        <h5 class="card-title">
+            @Model.DoctorName
+        </h5>
+
+        <dl class="row">
+
+            <dt class="col-sm-4">Innvilget tilskudd</dt>
+            <dd class="col-sm-8">
+                @Model.ApprovedGrant.ToString("N0") kr
+            </dd>
+
+            <dt class="col-sm-4">Dokumenterte kostnader</dt>
+            <dd class="col-sm-8">
+                @Model.DocumentedExpenses.ToString("N0") kr
+            </dd>
+
+            <dt class="col-sm-4">Veileder</dt>
+            <dd class="col-sm-8">
+                @Model.SupervisorName
+            </dd>
+
+            <dt class="col-sm-4">Til lege</dt>
+            <dd class="col-sm-8">
+                @Model.DoctorAmount.ToString("N0") kr
+            </dd>
+
+            <dt class="col-sm-4">Til veileder</dt>
+            <dd class="col-sm-8">
+                @Model.SupervisorAmount.ToString("N0") kr
+            </dd>
+
+            <dt class="col-sm-4">Til praksissted</dt>
+            <dd class="col-sm-8">
+                @Model.PracticeAmount.ToString("N0") kr
+            </dd>
+
+            <dt class="col-sm-4">Totalt fordelt</dt>
+            <dd class="col-sm-8">
+                <strong>
+                    @Model.TotalAllocated.ToString("N0") kr
+                </strong>
+            </dd>
+
+        </dl>
+
+        @if (Model.TotalAllocated == Model.ApprovedGrant)
+        {
+            <div class="alert alert-success">
+                Fordelingen stemmer med innvilget tilskudd.
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-warning">
+                Fordelingen stemmer ikke med innvilget tilskudd.
+            </div>
+        }
+
+    </div>
+</div>
+
+<a asp-action="Create"
+   class="btn btn-secondary mt-3">
+    Tilbake
+</a>

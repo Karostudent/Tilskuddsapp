@@ -1,0 +1,35 @@
+﻿@model Tilskuddsapp.Models.GrantCase
+
+@{
+    ViewData["Title"] = "Detaljer";
+}
+
+<h1>Tilskuddssak</h1>
+
+<div class="card">
+    <div class="card-body">
+
+        <h5 class="card-title">@Model.DoctorName</h5>
+
+        <dl class="row">
+
+            <dt class="col-sm-3">År</dt>
+            <dd class="col-sm-9">@Model.Year</dd>
+
+            <dt class="col-sm-3">Innvilget tilskudd</dt>
+            <dd class="col-sm-9">
+                @Model.ApprovedGrant.ToString("N0") kr
+            </dd>
+
+            <dt class="col-sm-3">Status</dt>
+            <dd class="col-sm-9">@Model.GrantCaseStatus</dd>
+
+        </dl>
+
+    </div>
+</div>
+
+<a asp-action="GrantCaseIndex"
+   class="btn btn-secondary mt-3">
+    Tilbake til oversikt
+</a>

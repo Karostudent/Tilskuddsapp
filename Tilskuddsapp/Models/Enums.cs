@@ -2,21 +2,23 @@
 {
     public class Enums
     {
+        public enum DoctorType
+        {
+            Legevakt,
+            SelvstendigNæringsdrivende
+        }
+
+        public enum SupervisorType
+        {
+            Intern,
+            Ekstern
+        }
+
+        public enum GrantCaseStatus
+        {
+            UnderBehandling,
+            Godkjent,
+            Avvist
+        }
     }
 }
-
-/*
-Enum kategorier:
-
-DoctorType
-    ALIS_Legevakt
-    ALIS_Selvstendig
-
-SupervisorType
-    Supervisor_Internal
-    Supervisor_External
-
-GrantCaseStatus
-    diverse satauser
-
- */

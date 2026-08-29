@@ -1,6 +1,215 @@
-﻿@{
-    ViewData["Title"] = "Opprett ny sak";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@model Tilskuddsapp.ViewModels.GrantCaseFormViewModel
 
-<p>Use this page to detail your site's privacy policy.</p>
+@{
+    ViewData["Title"] = "Ny tilskuddssak";
+}
+
+<div class="container">
+
+    <h1 class="mb-4">Ny tilskuddssak</h1>
+
+    <form asp-action="Create" method="post">
+
+        <div asp-validation-summary="ModelOnly"
+             class="text-danger"></div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <strong>Lege og tilskudd</strong>
+            </div>
+
+            <div class="card-body">
+
+                <div class="mb-3">
+                    <label asp-for="DoctorName"
+                           class="form-label">
+                        Navn på lege
+                    </label>
+
+                    <input asp-for="DoctorName"
+                           class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DoctorType"
+                           class="form-label">
+                        Type lege
+                    </label>
+
+                    <select asp-for="DoctorType"
+                            class="form-select">
+
+                        <option value="">
+                            Velg type
+                        </option>
+
+                        <option value="SelfEmployed">
+                            Selvstendig næringsdrivende
+                        </option>
+
+                        <option value="EmergencyClinic">
+                            Legevakt
+                        </option>
+
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Year"
+                           class="form-label">
+                        Tilskuddsår
+                    </label>
+
+                    <input asp-for="Year"
+                           class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ApprovedGrant"
+                           class="form-label">
+                        Innvilget tilskudd
+                    </label>
+
+                    <div class="input-group">
+                        <input asp-for="ApprovedGrant"
+                               class="form-control" />
+
+                        <span class="input-group-text">
+                            kr
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DocumentedExpenses"
+                           class="form-label">
+                        Dokumenterte kostnader
+                    </label>
+
+                    <div class="input-group">
+                        <input asp-for="DocumentedExpenses"
+                               class="form-control" />
+
+                        <span class="input-group-text">
+                            kr
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-4">
+
+            <div class="card-header">
+                <strong>Veileder</strong>
+            </div>
+
+            <div class="card-body">
+
+                <div class="mb-3">
+                    <label asp-for="SupervisorName"
+                           class="form-label">
+                        Navn på veileder
+                    </label>
+
+                    <input asp-for="SupervisorName"
+                           class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="SupervisorType"
+                           class="form-label">
+                        Type veileder
+                    </label>
+
+                    <select asp-for="SupervisorType"
+                            class="form-select">
+
+                        <option value="">
+                            Velg type
+                        </option>
+
+                        <option value="Internal">
+                            Intern veileder
+                        </option>
+
+                        <option value="External">
+                            Ekstern veileder
+                        </option>
+
+                    </select>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label asp-for="SupervisionHours"
+                               class="form-label">
+                            Antall timer
+                        </label>
+
+                        <input asp-for="SupervisionHours"
+                               class="form-control" />
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label asp-for="SupervisorHourlyRate"
+                               class="form-label">
+                            Timesats
+                        </label>
+
+                        <div class="input-group">
+
+                            <input asp-for="SupervisorHourlyRate"
+                                   class="form-control" />
+
+                            <span class="input-group-text">
+                                kr
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-4">
+
+            <div class="card-header">
+                <strong>Merknader</strong>
+            </div>
+
+            <div class="card-body">
+
+                <textarea asp-for="Notes"
+                          class="form-control"
+                          rows="3">
+                </textarea>
+
+            </div>
+
+        </div>
+
+
+        <button type="submit"
+                class="btn btn-primary">
+            Beregn fordeling
+        </button>
+
+        <a asp-action="GrantCaseIndex"
+           class="btn btn-secondary">
+            Avbryt
+        </a>
+
+    </form>
+
+</div>
