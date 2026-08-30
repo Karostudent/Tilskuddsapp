@@ -20,11 +20,73 @@ namespace Tilskuddsapp.Controllers
         {
             var grantCases = await _context.GrantCases
                 .Include(g => g.Doctor)
+                .Include(g => g.Supervisor)
                 .OrderByDescending(g => g.Year)
                 .ThenBy(g => g.DoctorName)
                 .ToListAsync();
 
             return View(grantCases);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ExportAllToExcel()
+        {
+            var grantCases = await _context.GrantCases
+                .Include(g => g.Doctor)
+                .Include(g => g.Supervisor)
+                .OrderByDescending(g => g.Year)
+                .ThenBy(g => g.DoctorName)
+                .ToListAsync();
+
+            using var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("Tilskuddssaker");
+
+            // Overskrifter
+            worksheet.Cell(1, 1).Value = "År";
+            worksheet.Cell(1, 2).Value = "Lege";
+            worksheet.Cell(1, 3).Value = "Legetype";
+            worksheet.Cell(1, 4).Value = "Veileder";
+            worksheet.Cell(1, 5).Value = "Veiledertype";
+            worksheet.Cell(1, 6).Value = "Innvilget tilskudd";
+            worksheet.Cell(1, 7).Value = "Maksimumsbeløp";
+            worksheet.Cell(1, 8).Value = "Veiledningstimer";
+            worksheet.Cell(1, 9).Value = "Status";
+            worksheet.Cell(1, 10).Value = "Merknader";
+
+            // Style på overskrifter
+            var headerRange = worksheet.Range(1, 1, 1, 10);
+            headerRange.Style.Font.Bold = true;
+            headerRange.Style.Fill.BackgroundColor = XLColor.LightBlue;
+            headerRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+            // Data
+            int row = 2;
+            foreach (var grantCase in grantCases)
+            {
+                worksheet.Cell(row, 1).Value = grantCase.Year;
+                worksheet.Cell(row, 2).Value = grantCase.DoctorName;
+                worksheet.Cell(row, 3).Value = grantCase.Doctor?.DoctorType.ToString() ?? "";
+                worksheet.Cell(row, 4).Value = grantCase.Supervisor?.Name ?? "";
+                worksheet.Cell(row, 5).Value = grantCase.Supervisor?.SupervisorType.ToString() ?? "";
+                worksheet.Cell(row, 6).Value = grantCase.ApprovedGrant;
+                worksheet.Cell(row, 7).Value = grantCase.MaximumGrant ?? 0;
+                worksheet.Cell(row, 8).Value = grantCase.SupervisionHours;
+                worksheet.Cell(row, 9).Value = grantCase.GrantCaseStatus.ToString();
+                worksheet.Cell(row, 10).Value = grantCase.Notes ?? "";
+
+                row++;
+            }
+
+            // Autofit kolonner
+            worksheet.Columns().AdjustToContents();
+
+            // Returner Excel-fil
+            using var stream = new MemoryStream();
+            workbook.SaveAs(stream);
+            var content = stream.ToArray();
+
+            var fileName = $"Tilskuddssaker_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+            return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
         }
 
         public async Task<IActionResult> GrantCaseDetails(int id)
