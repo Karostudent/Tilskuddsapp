@@ -2,8 +2,11 @@
 
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
-USER $APP_UID
+USER root
 WORKDIR /app
+# Create data directory for SQLite database with proper permissions
+RUN mkdir -p /app/data && chmod 777 /app/data
+USER $APP_UID
 EXPOSE 8080
 EXPOSE 8081
 

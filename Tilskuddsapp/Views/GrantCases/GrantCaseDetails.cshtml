@@ -29,7 +29,14 @@
     </div>
 </div>
 
-<a asp-action="GrantCaseIndex"
-   class="btn btn-secondary mt-3">
-    Tilbake til oversikt
-</a>
+<div class="mt-3">
+    <a asp-action="ExportToExcel"
+       asp-route-id="@Model.GrantCaseId"
+       class="btn btn-success">
+        📊 Eksporter til Excel
+    </a>
+    <a asp-action="GrantCaseIndex"
+       class="btn btn-secondary">
+        Tilbake til oversikt
+    </a>
+</div>

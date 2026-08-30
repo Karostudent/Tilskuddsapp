@@ -41,6 +41,9 @@ namespace Tilskuddsapp.ViewModels
 
         public string? Notes { get; set; }
 
+        // Advarsler og meldinger
+        public List<string> Warnings { get; set; } = new List<string>();
+
         public IEnumerable<SelectListItem> Doctors { get; set; }
             = Enumerable.Empty<SelectListItem>();
 

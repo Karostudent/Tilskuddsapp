@@ -1,9 +1,128 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Hjem";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Portal for håndtering av ALIS-tilskudd</h1>
-    <p>Her kan det komme knapper og hurtiglinker til ulike deler av prosessen. Store tydelige knapper.</p>
-    <p>Kanskje det kan være link til tilskuddskalkulatoren som ligger på ALIS.no.</p>
+<div class="text-center mb-5">
+    <h1 class="display-3 fw-bold text-primary mb-3">ALIS Tilskuddsportal</h1>
+    <p class="lead text-muted">Administrer tilskuddssaker, leger og veiledere enkelt og effektivt</p>
 </div>
+
+<div class="row g-4 mb-5">
+
+    <!-- Opprett ny tilskuddssak -->
+    <div class="col-md-6">
+        <a asp-controller="GrantCases" asp-action="Create" class="text-decoration-none">
+            <div class="card h-100 shadow-sm border-0 hover-card">
+                <div class="card-body text-center p-5">
+                    <div class="mb-4">
+                        <span class="display-1">➕</span>
+                    </div>
+                    <h3 class="card-title fw-bold mb-3">Opprett tilskuddssak</h3>
+                    <p class="card-text text-muted">
+                        Registrer ny tilskuddssak for lege med veileder og beregn fordeling av tilskudd
+                    </p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Oversikt tilskuddssaker -->
+    <div class="col-md-6">
+        <a asp-controller="GrantCases" asp-action="GrantCaseIndex" class="text-decoration-none">
+            <div class="card h-100 shadow-sm border-0 hover-card">
+                <div class="card-body text-center p-5">
+                    <div class="mb-4">
+                        <span class="display-1">📋</span>
+                    </div>
+                    <h3 class="card-title fw-bold mb-3">Oversikt tilskuddssaker</h3>
+                    <p class="card-text text-muted">
+                        Se alle registrerte tilskuddssaker, sorter og filtrer etter behov
+                    </p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Oversikt leger -->
+    <div class="col-md-6">
+        <a asp-controller="Doctors" asp-action="DoctorIndex" class="text-decoration-none">
+            <div class="card h-100 shadow-sm border-0 hover-card">
+                <div class="card-body text-center p-5">
+                    <div class="mb-4">
+                        <span class="display-1">👨‍⚕️</span>
+                    </div>
+                    <h3 class="card-title fw-bold mb-3">Oversikt leger</h3>
+                    <p class="card-text text-muted">
+                        Se alle registrerte leger og deres tilskuddssaker
+                    </p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Oversikt veiledere -->
+    <div class="col-md-6">
+        <a asp-controller="Supervisors" asp-action="SupervisorIndex" class="text-decoration-none">
+            <div class="card h-100 shadow-sm border-0 hover-card">
+                <div class="card-body text-center p-5">
+                    <div class="mb-4">
+                        <span class="display-1">👨‍🏫</span>
+                    </div>
+                    <h3 class="card-title fw-bold mb-3">Oversikt veiledere</h3>
+                    <p class="card-text text-muted">
+                        Se alle registrerte veiledere og antall tilskuddssaker
+                    </p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+</div>
+
+<!-- Info-seksjon -->
+<div class="row mt-5">
+    <div class="col-lg-8 mx-auto">
+        <div class="card border-0 bg-light">
+            <div class="card-body p-4">
+                <h4 class="card-title fw-bold mb-3">💡 Om ALIS-tilskudd</h4>
+                <p class="mb-2">
+                    Dette systemet hjelper deg med å administrere ALIS-tilskudd for leger i spesialisering.
+                </p>
+                <p class="mb-3">
+                    <strong>Funksjoner:</strong>
+                </p>
+                <ul class="list-unstyled">
+                    <li class="mb-2">✅ Registrer og administrer tilskuddssaker</li>
+                    <li class="mb-2">✅ Automatisk beregning av fordeling (lege, veileder, praksissted)</li>
+                    <li class="mb-2">✅ Oversikt over leger og veiledere</li>
+                    <li class="mb-2">✅ Sporing av tilskuddsstatus</li>
+                </ul>
+                <div class="mt-4">
+                    <a href="https://alis.no" target="_blank" class="btn btn-outline-primary">
+                        🔗 Besøk ALIS.no
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .hover-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+    }
+
+    .hover-card .card-body {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    }
+
+    .hover-card:hover .card-body {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+</style>

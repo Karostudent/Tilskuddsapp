@@ -6,6 +6,20 @@
 
 <h1>Beregnet fordeling</h1>
 
+@* Vis advarsler hvis det finnes noen *@
+@if (Model.Warnings.Any())
+{
+    <div class="alert alert-warning mt-3" role="alert">
+        <h5 class="alert-heading">⚠️ Advarsler</h5>
+        <ul class="mb-0">
+            @foreach (var warning in Model.Warnings)
+            {
+                <li>@warning</li>
+            }
+        </ul>
+    </div>
+}
+
 <div class="card mt-4">
     <div class="card-body">
 
@@ -27,7 +41,7 @@
 
             <dt class="col-sm-4">Veileder</dt>
             <dd class="col-sm-8">
-                @Model.SupervisorName
+                @Model.SupervisorName (@(Model.SupervisorType == "External" ? "Ekstern" : "Intern"))
             </dd>
 
             <dt class="col-sm-4">Til lege</dt>
@@ -57,20 +71,42 @@
         @if (Model.TotalAllocated == Model.ApprovedGrant)
         {
             <div class="alert alert-success">
-                Fordelingen stemmer med innvilget tilskudd.
+                ✅ Fordelingen stemmer med innvilget tilskudd.
             </div>
         }
         else
         {
             <div class="alert alert-warning">
-                Fordelingen stemmer ikke med innvilget tilskudd.
+                ⚠️ Fordelingen stemmer ikke med innvilget tilskudd.
             </div>
         }
 
     </div>
 </div>
 
-<a asp-action="Create"
-   class="btn btn-secondary mt-3">
-    Tilbake
-</a>
+<div class="mt-3">
+    <form asp-action="SaveGrantCase" method="post">
+        @Html.HiddenFor(m => m.DoctorName)
+        @Html.HiddenFor(m => m.DoctorType)
+        @Html.HiddenFor(m => m.Year)
+        @Html.HiddenFor(m => m.ApprovedGrant)
+        @Html.HiddenFor(m => m.DocumentedExpenses)
+        @Html.HiddenFor(m => m.SupervisorName)
+        @Html.HiddenFor(m => m.SupervisorType)
+        @Html.HiddenFor(m => m.SupervisionHours)
+        @Html.HiddenFor(m => m.SupervisorHourlyRate)
+        @Html.HiddenFor(m => m.SupervisorAmount)
+        @Html.HiddenFor(m => m.DoctorAmount)
+        @Html.HiddenFor(m => m.PracticeAmount)
+        @Html.HiddenFor(m => m.TotalAllocated)
+        @Html.HiddenFor(m => m.Notes)
+
+        <button type="submit" class="btn btn-primary">
+            💾 Lagre tilskuddssak
+        </button>
+    </form>
+
+    <a asp-action="Create" class="btn btn-secondary">
+        ← Tilbake
+    </a>
+</div>

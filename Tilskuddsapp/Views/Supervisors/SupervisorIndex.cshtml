@@ -1,8 +1,49 @@
-﻿@{
+﻿@model IEnumerable<Tilskuddsapp.Models.Supervisor>
+
+@{
     ViewData["Title"] = "Oversikt over veiledere";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Oversikt over veiledere</h1>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info mt-3">
+        <p>Ingen veiledere registrert ennå. Opprett en ny tilskuddssak for å legge til veiledere.</p>
+    </div>
+}
+else
+{
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Navn</th>
+                <th>Type</th>
+                <th>Antall tilskuddssaker</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var supervisor in Model)
+            {
+                <tr>
+                    <td>@supervisor.Name</td>
+                    <td>
+                        @if (supervisor.SupervisorType == Tilskuddsapp.Models.Enums.SupervisorType.Intern)
+                        {
+                            <span class="badge bg-primary">Intern</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-info">Ekstern</span>
+                        }
+                    </td>
+                    <td>@supervisor.GrantCases.Count</td>
+                    <td>
+                        @* Kan legge til lenke til detaljer senere *@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

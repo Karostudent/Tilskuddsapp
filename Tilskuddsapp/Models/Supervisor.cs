@@ -5,7 +5,7 @@ namespace Tilskuddsapp.Models;
 
 public class Supervisor
 {
-    public int SupervisoId { get; set; }
+    public int SupervisorId { get; set; }
 
     public string Name { get; set; } = string.Empty;
 
@@ -14,4 +14,7 @@ public class Supervisor
     public decimal HourlyRate { get; set; }
 
     public bool Active { get; set; } = true;
+
+    public ICollection<GrantCase> GrantCases { get; set; }
+            = new List<GrantCase>();
 }

@@ -1,8 +1,49 @@
-﻿@{
+﻿@model IEnumerable<Tilskuddsapp.Models.Doctor>
+
+@{
     ViewData["Title"] = "Oversikt over leger";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Her skal det komme en liste over alle leger som har en tilskuddssak under behandling</h1>
-    
-</div>
+<h1>Oversikt over leger</h1>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info mt-3">
+        <p>Ingen leger registrert ennå. Opprett en ny tilskuddssak for å legge til leger.</p>
+    </div>
+}
+else
+{
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Navn</th>
+                <th>Type</th>
+                <th>Antall tilskuddssaker</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var doctor in Model)
+            {
+                <tr>
+                    <td>@doctor.Name</td>
+                    <td>
+                        @if (doctor.DoctorType == Tilskuddsapp.Models.Enums.DoctorType.SelvstendigNæringsdrivende)
+                        {
+                            <span class="badge bg-primary">Selvstendig næringsdrivende</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-info">Legevakt</span>
+                        }
+                    </td>
+                    <td>@doctor.GrantCases.Count</td>
+                    <td>
+                        @* Kan legge til lenke til detaljer senere *@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
