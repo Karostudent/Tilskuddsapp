@@ -74,17 +74,22 @@ git clone <repository-url>
 cd Tilskuddsapp
 ```
 
-2. **Installer dependencies**
+2. **Gå inn i prosjektmappen**
+```bash
+cd Tilskuddsapp
+```
+
+3. **Installer dependencies**
 ```bash
 dotnet restore
 ```
 
-3. **Opprett database**
+4. **Opprett database**
 ```bash
 dotnet ef database update
 ```
 
-4. **Kjør applikasjonen**
+5. **Kjør applikasjonen**
 ```bash
 dotnet run
 ```
@@ -93,9 +98,9 @@ Applikasjonen vil være tilgjengelig på `https://localhost:5001` eller `http://
 
 ### Docker-installasjon
 
-1. **Bygg Docker-image**
+1. **Bygg Docker-image (fra rotmappen)**
 ```bash
-docker build -t tilskuddsapp .
+docker build -f Tilskuddsapp/Dockerfile -t tilskuddsapp .
 ```
 
 2. **Kjør container**
@@ -113,7 +118,7 @@ Applikasjonen bruker SQLite som database. Det finnes to forskjellige connection 
 ```json
 "DefaultConnection": "Data Source=Tilskuddsapp.db;Mode=ReadWriteCreate"
 ```
-Database-filen opprettes i prosjektmappen.
+Database-filen opprettes i prosjektmappen (`Tilskuddsapp/`).
 
 ### Docker/Production
 ```json
@@ -123,7 +128,7 @@ Database-filen opprettes i `/app/data/` med korrekte tillatelser.
 
 ### Migrasjoner
 
-Opprett ny migration:
+Opprett ny migration (fra `Tilskuddsapp/` mappen):
 ```bash
 dotnet ef migrations add <MigrationName>
 ```
@@ -172,32 +177,34 @@ Dette sikrer at den ikke-root brukeren som kjører applikasjonen har skrivetilga
 
 ```
 Tilskuddsapp/
-├── Controllers/          # MVC Controllers
-│   ├── GrantCasesController.cs
-│   ├── DoctorsController.cs
-│   ├── SupervisorsController.cs
-│   └── HomeController.cs
-├── Models/              # Datamodeller
-│   ├── GrantCase.cs
-│   ├── Doctor.cs
-│   ├── Supervisor.cs
-│   ├── Expense.cs
-│   └── Enums.cs
-├── ViewModels/          # View-spesifikke modeller
-│   └── GrantCaseFormViewModel.cs
-├── Views/               # Razor views
-│   ├── GrantCases/
-│   ├── Doctors/
-│   ├── Supervisors/
-│   ├── Home/
-│   └── Shared/
-├── Data/                # Database context
-│   └── ApplicationDbContext.cs
-├── Migrations/          # EF Core migrations
-├── wwwroot/            # Statiske filer
-├── appsettings.json    # Produksjons-config
-├── appsettings.Development.json  # Utviklings-config
-└── Dockerfile
+├── Tilskuddsapp/           # Hovedprosjekt
+│   ├── Controllers/        # MVC Controllers
+│   │   ├── GrantCasesController.cs
+│   │   ├── DoctorsController.cs
+│   │   ├── SupervisorsController.cs
+│   │   └── HomeController.cs
+│   ├── Models/            # Datamodeller
+│   │   ├── GrantCase.cs
+│   │   ├── Doctor.cs
+│   │   ├── Supervisor.cs
+│   │   ├── Expense.cs
+│   │   └── Enums.cs
+│   ├── ViewModels/        # View-spesifikke modeller
+│   │   └── GrantCaseFormViewModel.cs
+│   ├── Views/             # Razor views
+│   │   ├── GrantCases/
+│   │   ├── Doctors/
+│   │   ├── Supervisors/
+│   │   ├── Home/
+│   │   └── Shared/
+│   ├── Data/              # Database context
+│   │   └── ApplicationDbContext.cs
+│   ├── Migrations/        # EF Core migrations
+│   ├── wwwroot/          # Statiske filer
+│   ├── appsettings.json  # Produksjons-config
+│   ├── appsettings.Development.json  # Utviklings-config
+│   └── Dockerfile
+└── README.md              # Denne filen
 ```
 
 ## 📖 Bruk av systemet
@@ -240,7 +247,7 @@ Tilskuddsapp/
 **Problem:** Database-filen finnes ikke eller stien er feil.
 
 **Løsning:**
-- Kjør `dotnet ef database update`
+- Kjør `dotnet ef database update` fra `Tilskuddsapp/` mappen
 - Sjekk at connection string peker til riktig sti
 
 ### Veiledere/Leger vises ikke i oversikt
@@ -275,4 +282,4 @@ Dette er et praksisprosjekt for Kristiansand kommune. For spørsmål eller forsl
 
 ---
 
-*Sist oppdatert: Januar 2026 ved hjelp av GitHub Copilot*
+*Sist oppdatert: Januar 2026*
