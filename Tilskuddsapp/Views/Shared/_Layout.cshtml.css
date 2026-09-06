@@ -1,48 +1,153 @@
-﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿.site-header {
+  background: #fff;
+  color: #6c6c6c;
 }
 
-a {
-  color: #0077cc;
+.header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 76px;
+  padding: 8px 30px 8px 16px;
 }
 
-.btn-primary {
+.header-brand {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.header-brand img {
+  display: block;
+  width: 260px;
+  height: 34px;
+  max-width: 100%;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.header-control,
+.apply-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 0;
+  font-family: Arial, sans-serif;
+  white-space: nowrap;
+}
+
+.header-control {
+  gap: 5px;
+  min-height: 44px;
+  padding: 0;
+  background: transparent;
+  color: #6c6c6c;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.header-control:disabled,
+.apply-button:disabled {
+  opacity: 1;
+}
+
+.header-control svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.header-control .chevron {
+  width: 10px;
+  height: 10px;
+  margin-left: 2px;
+}
+
+.search-button {
+  width: 24px;
+}
+
+.apply-button {
+  min-width: 128px;
+  min-height: 52px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: #00546a;
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  font-size: 13px;
+  font-weight: 700;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+.page-content {
+  padding-top: 24px;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 100;
+  padding: 12px 18px;
+  background: #00546a;
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+.skip-link:focus {
+  top: 8px;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.header-brand:focus-visible {
+  outline: 3px solid #00546a;
+  outline-offset: 5px;
 }
 
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  white-space: nowrap;
   line-height: 60px;
 }
+
+@media (max-width: 850px) {
+  .header-nav {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .header-actions {
+    flex-wrap: wrap;
+    gap: 12px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px 12px;
+  }
+
+  .account-button {
+    margin-left: auto;
+  }
+
+  .header-control {
+    font-size: 14px;
+  }
+
+  .apply-button {
+    min-width: 110px;
+    min-height: 44px;
+  }
+}
+.apply-button { text-decoration: none; } .apply-button:hover { color: white; background: #004354; } .apply-button:focus-visible { outline: 3px solid #00546a; outline-offset: 3px; }

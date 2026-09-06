@@ -1,4 +1,4 @@
-namespace Tilskuddsapp.ViewModels
+namespace Tilskuddsapp.Models
 {
     public class ErrorViewModel
     {

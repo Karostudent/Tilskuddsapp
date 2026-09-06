@@ -1,9 +1,19 @@
+﻿using Npgsql;
+using Tilskuddsapp.Data;
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Local credentials are ignored by Git. Environment variables take precedence.
+builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true)
+    .AddEnvironmentVariables().AddCommandLine(args);
+builder.Services.AddSingleton(_ => NpgsqlDataSource.Create(
+    builder.Configuration.GetConnectionString("Postgres")
+    ?? throw new InvalidOperationException("Configure ConnectionStrings:Postgres. See README.")));
+builder.Services.AddSingleton<GrantDraftStore>();
+builder.Services.AddAntiforgery(options => options.HeaderName = "X-CSRF-TOKEN");
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+await app.Services.GetRequiredService<GrantDraftStore>().InitializeAsync();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

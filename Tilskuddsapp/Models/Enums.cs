@@ -1,22 +1,27 @@
-﻿namespace Tilskuddsapp.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Tilskuddsapp.Models;
+
+public enum GrantType
 {
-    public class Enums
-    {
-    }
+    [Display(Name = "Tilskudd til ALIS-avtale (inkl. veiledning)")]
+    AlisAgreementIncludingSupervision = 1,
+    [Display(Name = "Tilskudd til veiledning av ALIS")]
+    SupervisionOnly = 2
 }
 
-/*
-Enum kategorier:
+public enum PositionType
+{
+    [Display(Name = "Fastlege/fastlegevikar")]
+    RegularGpOrLocum = 1,
+    [Display(Name = "Introduksjonslege")]
+    IntroductoryDoctor = 2,
+    [Display(Name = "Allmennlege utenfor FLO")]
+    GeneralPractitionerOutsideRegularGpScheme = 3
+}
 
-DoctorType
-    ALIS_Legevakt
-    ALIS_Selvstendig
-
-SupervisorType
-    Supervisor_Internal
-    Supervisor_External
-
-GrantCaseStatus
-    diverse satauser
-
- */
+public enum ApplicationStatus
+{
+    Draft = 1,
+    Submitted = 2
+}

@@ -1,0 +1,17 @@
+﻿.application-section { border: 1px solid #d9dfe1; border-radius: 4px; overflow: hidden; }
+.application-section h2 { background: #00546a; color: white; font-size: 1.25rem; padding: 12px 24px; margin: 0; }
+.section-content { padding: 24px; }
+.section-content h3 { font-size: 1.2rem; border-bottom: 1px dotted #aaa; padding-bottom: 10px; margin: 28px 0 24px; }
+.section-content legend { font-size: 1rem; font-weight: 600; }
+.form-label { font-weight: 600; }
+.form-control, .form-select { border-color: #00546a; }
+.form-control[readonly] { background: #eee; }
+.date-input { max-width: 200px; }
+.amount-input { max-width: 280px; }
+.employment-table { min-width: 900px; }
+.employment-table th { font-size: .85rem; color: #666; }
+.form-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 12px; padding: 16px 24px; background: #f1f6f8; border-top: 1px solid #d9dfe1; }
+.form-actions span { margin-right: auto; color: #666; }
+.btn-outline-primary { color: #00546a; border-color: #00546a; }
+.btn-outline-primary:hover { background: #00546a; color: white; }
+@media (max-width: 600px) { .section-content { padding: 16px; } }

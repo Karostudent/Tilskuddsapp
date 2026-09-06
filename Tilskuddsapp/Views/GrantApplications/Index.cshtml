@@ -1,0 +1,21 @@
+﻿@model List<Tilskuddsapp.Data.DraftSummary>
+@{ ViewData["Title"] = "Lagrede utkast"; }
+<h1>Lagrede utkast</h1>
+<p><a asp-action="Create" class="btn btn-primary">Ny søknad</a></p>
+@if (Model.Count == 0)
+{
+    <p>Ingen utkast er lagret ennå.</p>
+}
+else
+{
+    <table class="table">
+        <thead><tr><th>Utkast</th><th>Sist lagret (UTC)</th><th>Åpne</th></tr></thead>
+        <tbody>
+        @foreach (var draft in Model)
+        {
+            <tr><td>@draft.Id</td><td>@draft.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                <td><a asp-action="Create" asp-route-id="@draft.Id">Åpne utkast @draft.Id</a></td></tr>
+        }
+        </tbody>
+    </table>
+}
