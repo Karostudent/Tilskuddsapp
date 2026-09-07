@@ -180,7 +180,7 @@
                 invalid.reportValidity();
                 return;
             }
-            const payload = { DoctorProfessions: initialDraft.DoctorProfessions || [],
+            const payload = { DoctorProfessions: document.getElementById("doctor-professions").value.split(",").map(value => value.trim()).filter(Boolean),
                 SelectedPositionTypes: [], EmploymentPeriods: [], Certificate: { Sessions: [] } };
             for (const input of form.querySelectorAll("input[name],select[name],textarea[name]")) {
                 const name = input.name;

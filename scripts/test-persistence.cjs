@@ -13,6 +13,8 @@ const { chromium } = require(path.join(process.env.TEMP, 'tilskuddsapp-browser-t
         page.on('pageerror', error => errors.push(error.message));
         await page.goto('http://localhost:5189/GrantApplications/Create');
         await page.locator('#HprNumber').fill('TEST-DO-NOT-USE');
+        await page.locator('#DoctorName').fill('Test Doctor');
+        await page.locator('#doctor-professions').fill('Lege,  Veileder, ');
         await page.locator('#ConfirmsSpecialization').check();
         await page.locator('#SpecializationStartDate').fill('2025-06-01');
         await page.locator('#grant-type-1').check();
@@ -42,6 +44,8 @@ const { chromium } = require(path.join(process.env.TEMP, 'tilskuddsapp-browser-t
         await page.waitForFunction(() => document.querySelector('[name="Id"]').value !== '');
         await page.reload();
         assert.equal(await page.locator('#HprNumber').inputValue(), 'TEST-DO-NOT-USE');
+        assert.equal(await page.locator('#DoctorName').inputValue(), 'Test Doctor');
+        assert.equal(await page.locator('#doctor-professions').inputValue(), 'Lege, Veileder');
         assert.equal(await page.locator('#ConfirmsSpecialization').isChecked(), true);
         assert.equal(await page.locator('[name="EmploymentPeriods[0].PositionPercentage"]').inputValue(), '80.5');
         await page.locator('#next-step').click();

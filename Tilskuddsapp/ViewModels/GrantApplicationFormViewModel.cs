@@ -11,7 +11,7 @@ public class GrantApplicationFormViewModel
     public int Version { get; set; }
     public string HprNumber { get; set; } = "";
 
-    // Populate these from a trusted lookup when HPR integration is implemented.
+    // Entered manually until HPR lookup is implemented; not registry-verified.
     public string? DoctorName { get; set; }
     public List<string> DoctorProfessions { get; set; } = [];
 
