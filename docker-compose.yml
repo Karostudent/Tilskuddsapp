@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: tilskuddsapp
       POSTGRES_USER: tilskuddsapp
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      POSTGRES_PASSWORD: tilskuddsapp_dev
     ports:
       - "127.0.0.1:5433:5432"
     volumes:
@@ -20,7 +20,7 @@ services:
       context: ./Tilskuddsapp
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ConnectionStrings__Postgres: Host=postgres;Port=5432;Database=tilskuddsapp;Username=tilskuddsapp;Password=${POSTGRES_PASSWORD}
+      ConnectionStrings__Postgres: Host=postgres;Port=5432;Database=tilskuddsapp;Username=tilskuddsapp;Password=tilskuddsapp_dev
     ports:
       - "127.0.0.1:5189:8080"
     depends_on:

@@ -2,9 +2,8 @@
 using Tilskuddsapp.Data;
 var builder = WebApplication.CreateBuilder(args);
 
-// Local credentials are ignored by Git. Environment variables take precedence.
-builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true)
-    .AddEnvironmentVariables().AddCommandLine(args);
+// Development uses the local PostgreSQL settings; environment variables override them.
+
 builder.Services.AddSingleton(_ => NpgsqlDataSource.Create(
     builder.Configuration.GetConnectionString("Postgres")
     ?? throw new InvalidOperationException("Configure ConnectionStrings:Postgres. See README.")));
